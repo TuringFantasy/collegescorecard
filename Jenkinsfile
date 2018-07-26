@@ -60,8 +60,6 @@ pipeline {
                     def macawPublishCmd = "${env.MACAW_SDK_HOME}/tools/macaw-publish-tools/bin/macawpublish"
                     echo "Generating a new docker image tag ${dockerImageTag}"
                     sh "export PYTHONIOENCODING=UTF-8; ${macawPublishCmd} service --tag ${dockerImageTag} ${serviceHome}"
-                    sh "sleep 5s"
-                    sh "export PYTHONIOENCODING=UTF-8; ${macawPublishCmd} webapp --tag ${dockerImageTag} --name collegescorecard-webapp --version 1.0.0 --file  ${serviceHome}/webapp/dist/ssaservice.war --skip"
 
                 }
             }
