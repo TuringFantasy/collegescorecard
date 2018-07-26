@@ -4,35 +4,89 @@
 package io.zolontech.services.ed.impl;
 
 import java.lang.Override;
+import java.util.HashMap;
+import java.util.Map;
+
+import io.zolontech.services.ed.DomainEntityInstantiator;
+import io.zolontech.services.ed.GetReviewCommentRequest;
+import io.zolontech.services.ed.GetReviewCommentResponse;
+import io.zolontech.services.ed.GetStudentResponse;
+import io.zolontech.services.ed.StudentProfile;
 
 public class Collegescorecard implements com.cfx.service.api.Service, io.zolontech.services.ed.Collegescorecard {
-  @Override
-  public void initialize(com.cfx.service.api.config.Configuration config) throws com.cfx.service.api.ServiceException {
-  }
+	
+	private Map<String, StudentProfile> students = new HashMap<>();
+	@Override
+	public void initialize(com.cfx.service.api.config.Configuration config)
+			throws com.cfx.service.api.ServiceException {
+	}
 
-  @Override
-  public void start(com.cfx.service.api.StartContext startContext) throws com.cfx.service.api.ServiceException {
-  }
+	@Override
+	public void start(com.cfx.service.api.StartContext startContext) throws com.cfx.service.api.ServiceException {
+		StudentProfile profile = DomainEntityInstantiator.getInstance().newInstance(StudentProfile.class);
+		profile.setName("student1@school.edu");
+		profile.setDegree("Masters");
+		profile.setMajor("History");
+		profile.setType("NEW");
+		students.put(profile.getName(), profile);
+		
+		profile = DomainEntityInstantiator.getInstance().newInstance(StudentProfile.class);
+		profile.setName("student2@school.edu");
+		profile.setDegree("Bachelors");
+		profile.setMajor("Physics");
+		profile.setType("NEW");
+		students.put(profile.getName(), profile);
+		
+		profile = DomainEntityInstantiator.getInstance().newInstance(StudentProfile.class);
+		profile.setName("student3@school.edu");
+		profile.setDegree("Bachelors");
+		profile.setMajor("Political Science");
+		profile.setType("ALUMNI");		
+		students.put(profile.getName(), profile);
+	}
 
-  @Override
-  public void stop(com.cfx.service.api.StopContext stopContext) throws com.cfx.service.api.ServiceException {
-  }
+	@Override
+	public void stop(com.cfx.service.api.StopContext stopContext) throws com.cfx.service.api.ServiceException {
+	}
 
-  @Override
-  public io.zolontech.services.ed.SearchSchoolsResponse searchSchools(io.zolontech.services.ed.SearchSchoolsRequest request) {
-    // TODO: Auto-generated code;
-    return null;
-  }
+	@Override
+	public io.zolontech.services.ed.SearchSchoolsResponse searchSchools(
+			io.zolontech.services.ed.SearchSchoolsRequest request) {
+		return null;
+	}
 
-  @Override
-  public io.zolontech.services.ed.GetStudentResponse getStudent(io.zolontech.services.ed.GetStudentRequest request) {
-    // TODO: Auto-generated code;
-    return null;
-  }
+	@Override
+	public io.zolontech.services.ed.GetStudentResponse getStudent(io.zolontech.services.ed.GetStudentRequest request) {
+		GetStudentResponse response = DomainEntityInstantiator.getInstance().newInstance(GetStudentResponse.class);
+		if (request.getEmailId() == null) {
+			response.setStatus("404");
+		}
+		
+		StudentProfile profile = students.get(request.getEmailId());
+		
+		if (profile == null) {
+			profile = DomainEntityInstantiator.getInstance().newInstance(StudentProfile.class);
+			profile.setName(request.getEmailId());
+			profile.setDegree("Bachelors");
+			profile.setMajor("Political Science");
+			profile.setType("NEW");		
+			students.put(profile.getName(), profile);
+		}
+		
+		response.setStatus("200");
+		response.setResponse200(profile);
+		return response;
+	}
 
-  @Override
-  public io.zolontech.services.ed.AddReviewOrCommentResponse addReviewOrComment(io.zolontech.services.ed.AddReviewOrCommentRequest request) {
-    // TODO: Auto-generated code;
-    return null;
-  }
+	@Override
+	public io.zolontech.services.ed.AddReviewOrCommentResponse addReviewOrComment(
+			io.zolontech.services.ed.AddReviewOrCommentRequest request) {
+		return null;
+	}
+
+	@Override
+	public GetReviewCommentResponse getReviewComment(GetReviewCommentRequest arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
