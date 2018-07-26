@@ -142,6 +142,26 @@
                     }
                 }
             },
+            "getReviewCommentRequest":{
+                "properties":{
+                    "schoolName":{
+                        "description":"School Name",
+                        "mandatory":true,
+                        "type":"string"
+                    }
+                }
+            },
+            "getReviewCommentResponse":{
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "response200":{
+                        "description":"Successful invocation of the API",
+                        "type":"ReviewComment"
+                    }
+                }
+            },
             "addReviewOrCommentRequest":{
                 "properties":{
                     "body":{
@@ -187,6 +207,19 @@
                 ],
                 "output":{
                     "type":"getStudentResponse"
+                }
+            },
+            {
+                "name":"getReviewComment",
+                "description":"",
+                "inputs":[
+                    {
+                        "name":"request",
+                        "type":"getReviewCommentRequest"
+                    }
+                ],
+                "output":{
+                    "type":"getReviewCommentResponse"
                 }
             },
             {

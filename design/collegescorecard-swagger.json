@@ -91,6 +91,34 @@
       }
     },
     "/reviewOrComment": {
+      "get": {
+        "summary": "Returns review or comment details",
+        "description": "",
+        "operationId": "getReviewComment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "schoolName",
+            "type": "string",
+            "required": true,
+            "description": "School Name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful invocation of the API",
+            "schema": {
+              "$ref": "#/definitions/ReviewComment"
+            }
+          }
+        }
+      },
       "post": {
         "summary": "Add review or comment details",
         "description": "",
