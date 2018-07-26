@@ -1,0 +1,210 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "College Scorecard Application.",
+    "version": "1.0.0",
+    "title": "collegescorecard",
+    "termsOfService": "https://api.honeybadger.us/terms/",
+    "contact": {
+      "email": "apiteam@macaw.io",
+      "url": "http://io.zolontech.services.ed"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "api.honeybadger.us",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "school",
+      "description": "School or college"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/schools": {
+      "get": {
+        "summary": "Search Schools",
+        "description": "Search Schools",
+        "operationId": "searchSchools",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "type": "string",
+            "required": true,
+            "description": "School Name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/School"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile": {
+      "get": {
+        "summary": "Returns student details",
+        "description": "",
+        "operationId": "getStudent",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "emailId",
+            "type": "string",
+            "required": true,
+            "description": "Email ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful invocation of the API",
+            "schema": {
+              "$ref": "#/definitions/StudentProfile"
+            }
+          }
+        }
+      }
+    },
+    "/reviewOrComment": {
+      "post": {
+        "summary": "Add review or comment details",
+        "description": "",
+        "operationId": "addReviewOrComment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ReviewComment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful invocation of the API"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StudentProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Student name"
+        },
+        "major": {
+          "type": "string",
+          "description": "Name of the major"
+        },
+        "degree": {
+          "type": "string",
+          "description": "Name of the Degree"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the office",
+          "enum": [
+            "NEW",
+            "CURRENT",
+            "PROSPECT"
+          ]
+        }
+      }
+    },
+    "School": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        },
+        "accreditor": {
+          "type": "string"
+        },
+        "schoolurl": {
+          "type": "string"
+        },
+        "pricecalculatorurl": {
+          "type": "string"
+        },
+        "underinvestigation": {
+          "type": "string"
+        },
+        "maincampus": {
+          "type": "string"
+        },
+        "salaryrange": {
+          "type": "string"
+        }
+      }
+    },
+    "ReviewComment": {
+      "type": "object",
+      "properties": {
+        "schoolName": {
+          "type": "string"
+        },
+        "degree": {
+          "type": "string"
+        },
+        "major": {
+          "type": "string"
+        },
+        "review": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "Review / Comment",
+          "enum": [
+            "REVIEW",
+            "COMMENT"
+          ]
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Image Manager",
+    "url": "https://us.honeybadger.us"
+  }
+}
