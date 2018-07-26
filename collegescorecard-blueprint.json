@@ -1,0 +1,36 @@
+{
+ "id": "6c2f77d6-f43a-587d-9db3-61a4a9eee34e", 
+ "name": "Macaw Service Blueprint for ", 
+ "description": "Macaw Service Blueprint for ", 
+ "category": "Macaw Services", 
+ "tag": "MicroServices", 
+ "icon": "microservices", 
+ "published": {
+  "date": "2018-07-26T19:51:02.899082", 
+  "organization": "macaw.io", 
+  "user": "macaw"
+ }, 
+ "revision": "1.0", 
+ "services": [
+  {
+   "minQuantity": 0, 
+   "configDescriptors": [], 
+   "volumes": [], 
+   "service-version": "1.0.0", 
+   "defaultQuantity": 1, 
+   "service-name": "collegescorecard", 
+   "id": "collegescorecard", 
+   "name": "collegescorecard-v1.0.0", 
+   "exposePorts": [], 
+   "service-namespace": "io.zolontech.services.ed", 
+   "maxQuantity": 8
+  }
+ ], 
+ "webapps": [], 
+ "dependencies": [], 
+ "deployment": {
+  "order": [
+   "collegescorecard"
+  ]
+ }
+}
